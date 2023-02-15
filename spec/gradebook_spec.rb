@@ -16,3 +16,4 @@ RSpec.describe Gradebook do
       expect(gradebook.courses).to eq([])
     end
   end
+end
