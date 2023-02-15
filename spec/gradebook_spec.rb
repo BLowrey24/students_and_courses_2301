@@ -5,8 +5,14 @@ require './lib/student'
 RSpec.describe Gradebook do
 
   let(:gradebook) { Gradebook.new("Mr. Lowrey") }
+
   let(:course1) { Course.new("Calculus", 2) }
   let(:course2) { Course.new("Science", 4) }
+
+  let(:student1) { Student.new({name: "Morgan", age: 21}) }
+  let(:student2) { Student.new({name: "Jordan", age: 29}) }
+  let(:student3) { Student.new(name: "Bob", age: 19) }
+  let(:student4) { Student.new(name: "Alice", age: 16) }
 
   describe '#initialize' do
     it 'exists' do
@@ -28,6 +34,21 @@ RSpec.describe Gradebook do
       gradebook.add_course(course2)
       
       expect(gradebook.courses).to eq([course1, course2])
+    end
+  end
+
+  describe "#list_all_students" do
+    it "" do
+      course1.enroll(student1)
+      course2.enroll(student2)
+      course2.enroll(student3)
+      gradebook.add_course(course1)
+      gradebook.add_course(course2)
+
+      expect(gradebook.list_all_students).to eq({
+        course1 => [student1],
+        course2 => [student2, student3]
+      })
     end
   end
 end
